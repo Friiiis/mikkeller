@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mikkeller/Styles.dart';
 
 class MikkellerAppBar extends StatelessWidget {
   final String title;
@@ -10,7 +11,7 @@ class MikkellerAppBar extends StatelessWidget {
       {Key key,
       this.title,
       this.backgroundColor,
-      this.height = 120,
+      this.height = 100,
       this.textColor})
       : super(key: key);
 
@@ -24,11 +25,7 @@ class MikkellerAppBar extends StatelessWidget {
       child: Center(
         child: Text(
           title,
-          style: TextStyle(
-            fontSize: 38,
-            fontFamily: 'Mikkeller',
-            color: textColor,
-          ),
+          style: Styles.mikkellerText(38),
         ),
       ),
     );

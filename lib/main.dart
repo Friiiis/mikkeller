@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:mikkeller/ColorPicker.dart';
+import 'package:mikkeller/pages/About.dart';
+import 'package:mikkeller/pages/Beers.dart';
+import 'package:mikkeller/pages/Locations.dart';
+import 'package:mikkeller/pages/Page.dart';
 import 'package:mikkeller/widgets/BottomNav.dart';
 import 'package:mikkeller/widgets/BottomNavIcon.dart';
 import 'package:mikkeller/widgets/MikkellerAppBar.dart';
+import 'package:mikkeller/Model.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(MyApp());
+  });
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -13,7 +25,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Mikkeller',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: ColorPicker.scrollOverflowColor,
       ),
       home: HomePage(),
     );
@@ -26,12 +38,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  double _appBarHeight = 120;
+  List<Page> pages = List();
+
+  double _appBarHeight = 100;
   double _tabBarHeight = 75;
 
   int _currentIndex = 0;
 
   PageController _pageController;
+
+  final Model model = Model();
 
   void bottomNavigationTapped(int index) {
     setState(() {
@@ -40,52 +56,64 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void _setPages() {
+    pages.add(
+      Page(
+        title: 'Mikkeller',
+        tabBarTitle: 'Beers',
+        tabBarIcon: 'assets/images/beer_navbar.png',
+        page: BeersPage(),
+      ),
+    );
+    pages.add(
+      Page(
+        title: 'Locations',
+        tabBarIcon: 'assets/images/map_navbar.png',
+        page: LocationsPage(),
+        // model: model,
+      ),
+    );
+    pages.add(
+      Page(
+        title: 'The Story',
+        tabBarTitle: 'About',
+        tabBarIcon: 'assets/images/henry_pic.png',
+        page: AboutPage(),
+      ),
+    );
+  }
+
   @override
   void initState() {
     _pageController = PageController(initialPage: 0);
+    _setPages();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorPicker.mainBackgroundColor,
       body: Stack(
         children: <Widget>[
           // Content
           Container(
-            padding: EdgeInsets.only(top: _appBarHeight, bottom: _tabBarHeight),
+            padding: EdgeInsets.only(top: _appBarHeight-1, bottom: _tabBarHeight),
             child: PageView(
               physics: NeverScrollableScrollPhysics(),
               controller: _pageController,
-              children: <Widget>[
-                Center(
-                  child: Text(
-                    'Cybeerspace',
-                    style: TextStyle(fontFamily: 'Mikkeller'),
-                  ),
-                ),
-                Center(
-                  child: Text(
-                    'Profile',
-                    style: TextStyle(fontFamily: 'Mikkeller'),
-                  ),
-                ),
-                Center(
-                  child: Text(
-                    'Locations',
-                    style: TextStyle(fontFamily: 'Mikkeller'),
-                  ),
-                ),
-              ],
+              children: pages,
             ),
           ),
           // App bar
           Positioned(
             child: MikkellerAppBar(
               height: _appBarHeight,
-              title: 'Mikkeller',
-              backgroundColor: Colors.white,
-              textColor: Color(0xff424242),
+              title: pages[_currentIndex].getTitle(),
+              backgroundColor: _currentIndex == 0
+                  ? ColorPicker.beerPageGreen
+                  : ColorPicker.mainBackgroundColor,
+              textColor: ColorPicker.mainFontColor,
             ),
           ),
           // Bottom navigation
@@ -99,16 +127,16 @@ class _HomePageState extends State<HomePage> {
               fontColor: Color(0xff424242),
               items: [
                 BottomNavIcon(
-                  text: 'Cybeerspace',
-                  asset: 'assets/images/beer_navbar.png',
+                  text: pages[0].getTabBarTitle(),
+                  asset: pages[0].getTabBarIcon(),
                 ),
                 BottomNavIcon(
-                  text: 'Profile',
-                  asset: 'assets/images/henry_pic.png',
+                  text: pages[1].getTabBarTitle(),
+                  asset: pages[1].getTabBarIcon(),
                 ),
                 BottomNavIcon(
-                  text: 'Locations',
-                  asset: 'assets/images/map_navbar.png',
+                  text: pages[2].getTabBarTitle(),
+                  asset: pages[2].getTabBarIcon(),
                 )
               ],
             ),

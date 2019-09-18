@@ -3,7 +3,7 @@ import 'package:mikkeller/ColorPicker.dart';
 import 'package:mikkeller/Styles.dart';
 
 class TabNavigator extends StatefulWidget {
-final Color backgroundColor;
+  final Color backgroundColor;
   final Color fontColor;
   final List<String> items;
   final int currentIndex;
@@ -25,7 +25,6 @@ final Color backgroundColor;
 }
 
 class _TabNavigatorState extends State<TabNavigator> {
-  
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -34,12 +33,13 @@ class _TabNavigatorState extends State<TabNavigator> {
     return Container(
       padding: EdgeInsets.only(top: 15),
       decoration: BoxDecoration(
+          color: widget.backgroundColor,
           border: Border(
-        bottom: BorderSide(
-          color: ColorPicker.mainFontColor,
-          width: 1,
-        ),
-      )),
+            bottom: BorderSide(
+              color: ColorPicker.mainFontColor,
+              width: 1,
+            ),
+          )),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceAround,

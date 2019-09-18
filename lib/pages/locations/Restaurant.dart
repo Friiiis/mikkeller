@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mikkeller/ColorPicker.dart';
 import 'package:mikkeller/Styles.dart';
 import 'package:mikkeller/model/Place.dart';
+import 'package:mikkeller/pages/locations/RestaurantBeers.dart';
 
 class RestaurantPage extends StatefulWidget {
   final Place place;
@@ -16,7 +17,6 @@ class RestaurantPage extends StatefulWidget {
 
 class _RestaurantPageState extends State<RestaurantPage> {
   final Place place;
-  double xAlignment = 10;
   double opacity = 0;
 
   _RestaurantPageState({Key key, this.place});
@@ -74,9 +74,21 @@ class _RestaurantPageState extends State<RestaurantPage> {
                           margin: EdgeInsets.only(
                             top: 20,
                           ),
-                          child: Image.asset(
-                            'assets/images/beer_button.png',
-                            width: 250,
+                          child: InkWell(
+                            splashColor: ColorPicker.mainBackgroundColor,
+                            highlightColor: ColorPicker.mainBackgroundColor,
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => RestaurantBeersPage(
+                                  place: place,
+                                ),
+                              ),
+                            ),
+                            child: Image.asset(
+                              'assets/images/beer_button.png',
+                              width: 250,
+                            ),
                           ),
                         ),
                         Container(

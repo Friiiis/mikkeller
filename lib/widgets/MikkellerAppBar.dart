@@ -6,13 +6,15 @@ class MikkellerAppBar extends StatelessWidget {
   final Color backgroundColor;
   final Color textColor;
   final double height;
+  final double verticalPadding;
 
   const MikkellerAppBar(
       {Key key,
       this.title,
       this.backgroundColor,
       this.height = 100,
-      this.textColor})
+      this.textColor,
+      this.verticalPadding = 0})
       : super(key: key);
 
   @override
@@ -20,12 +22,13 @@ class MikkellerAppBar extends StatelessWidget {
     return Container(
       color: backgroundColor,
       height: height,
-      padding: EdgeInsets.only(top: 35),
+      padding: EdgeInsets.only(top: 35, left: verticalPadding, right: verticalPadding),
       // alignment: Alignment.center,
       child: Center(
         child: Text(
           title,
           style: Styles.mikkellerText(38),
+          textAlign: TextAlign.center,
         ),
       ),
     );

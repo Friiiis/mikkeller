@@ -32,7 +32,7 @@ class Model {
         2.4,
         '02:00'));
     places.add(Place(
-        'Øl og Brød',
+        'Ol og Brod',
         'assets/images/OlOgBrodLogo.png',
         'Classic danish food, snaps and beer',
         'Fantasivej 23, 2000 Frederiksberg',

@@ -37,7 +37,7 @@ class BeersPage extends StatelessWidget {
                   ),
                   decoration: Styles.strokeAndHardShadow,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(25)),
+                    borderRadius: BorderRadius.all(Radius.circular(24)),
                     child: Image.asset('assets/images/merch-animated.gif'),
                   ),
                 ),

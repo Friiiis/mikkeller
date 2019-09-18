@@ -104,7 +104,8 @@ class _MikkellerBottomNavState extends State<MikkellerBottomNav>
             duration: Duration(milliseconds: 500),
             curve: Curves.fastOutSlowIn,
             child: Image.asset(
-              'assets/images/mikkeller_mand.png',
+              'assets/images/mikkeller_mand.gif',
+              // 'assets/images/mikkeller_mand.png',
               width: screenWidth / widget.items.length,
             ),
           ),

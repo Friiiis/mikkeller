@@ -38,7 +38,7 @@ class _RestaurantBeersPageState extends State<RestaurantBeersPage> {
                   index: 1,
                   showBottomBorder: true,
                   tapColor: Colors.green[300],
-                  tags: ["Light", "Organic", "Pilsner"],
+                  tags: ["Organic", "Pilsner", "4,5%"],
                 ),
                 RestaurantBeerCard(
                   beerName: 'Proper Pint',
@@ -47,7 +47,7 @@ class _RestaurantBeersPageState extends State<RestaurantBeersPage> {
                   index: 2,
                   showBottomBorder: true,
                   tapColor: Colors.orange[300],
-                  tags: ["Dark", "Pint"],
+                  tags: ["Dark", "Pint", "6,5%"],
                 ),
                 RestaurantBeerCard(
                   beerName: "Goose Nose Mango",
@@ -56,8 +56,9 @@ class _RestaurantBeersPageState extends State<RestaurantBeersPage> {
                   index: 3,
                   showBottomBorder: false,
                   tapColor: Colors.amberAccent,
-                  tags: ["Light", "Fruity"],
+                  tags: ["Light", "Fruity", "4,0%"],
                 ),
+                Container(height: 40,),
               ],
             ),
           ),

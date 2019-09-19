@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mikkeller/Styles.dart';
+import 'package:mikkeller/pages/beers/BeersTypePage.dart';
 import 'package:mikkeller/widgets/BeerCard.dart';
 
 import '../ColorPicker.dart';
@@ -18,16 +19,52 @@ class BeersPage extends StatelessWidget {
               BeerCard(
                 imageAsset: 'assets/images/mediumbottle.png',
                 title: 'Bottled beers',
+                onTap: () => Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: Duration(milliseconds: 500),
+                    pageBuilder: (_, __, ___) => BeersTypePage(
+                      type: "bottle",
+                    ),
+                  ),
+                ),
               ),
               BeerCard(
                 imageAsset: 'assets/images/mediumcan.png',
                 title: 'Canned beers',
+                onTap: () => Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: Duration(milliseconds: 500),
+                    pageBuilder: (_, __, ___) => BeersTypePage(
+                      type: "can",
+                    ),
+                  ),
+                ),
               ),
               BeerCard(
                 imageAsset: 'assets/images/mediumtap.png',
                 title: 'Beers on tap',
+                onTap: () => Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: Duration(milliseconds: 500),
+                    pageBuilder: (_, __, ___) => BeersTypePage(
+                      type: "tap",
+                    ),
+                  ),
+                ),
               ),
               InkWell(
+                onTap: () => showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title:
+                          Text("*opens the Mikkeller merch page in browser*"),
+                    );
+                  },
+                ),
                 child: Container(
                   margin: EdgeInsets.only(
                     top: 20,

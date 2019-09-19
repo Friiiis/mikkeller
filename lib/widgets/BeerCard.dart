@@ -6,12 +6,15 @@ import '../ColorPicker.dart';
 class BeerCard extends StatelessWidget {
   final String imageAsset;
   final String title;
+  final Function onTap;
 
-  const BeerCard({Key key, this.imageAsset, this.title}) : super(key: key);
+  const BeerCard({Key key, this.imageAsset, this.title, this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: onTap,
       child: Stack(
         children: <Widget>[
           Center(
@@ -36,11 +39,14 @@ class BeerCard extends StatelessWidget {
           ),
           Positioned(
             right: 90,
-            child: Transform.rotate(
-              angle: 320,
-              child: Image.asset(
-                imageAsset,
-                height: 100,
+            child: Hero(
+              tag: imageAsset,
+              child: Transform.rotate(
+                angle: 320,
+                child: Image.asset(
+                  imageAsset,
+                  height: 100,
+                ),
               ),
             ),
           ),

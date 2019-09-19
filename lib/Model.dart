@@ -19,14 +19,14 @@ class Model {
         '22:00'));
     places.add(Place(
         'Warpigs',
-        'assets/images/WarpigsLogo.png',
+        'assets/images/WarpigsLogo2.png',
         'Texas bbq brewpup',
         'Fantasivej 23, 2000 Frederiksberg',
         1.7,
         '02:00'));
     places.add(Place(
         'Mikkeller & Friends',
-        'assets/images/MikkellerFriendsLogo.png',
+        'assets/images/MikkellerFriendsLogo2.png',
         '40 different tap beers',
         'Fantasivej 23, 2000 Frederiksberg',
         2.4,

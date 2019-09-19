@@ -9,6 +9,7 @@ class RestaurantBeerCard extends StatelessWidget {
   final Color tapColor;
   final bool showBottomBorder;
   final List<String> tags;
+  final String imageAsset;
 
   const RestaurantBeerCard(
       {Key key,
@@ -17,11 +18,119 @@ class RestaurantBeerCard extends StatelessWidget {
       this.index,
       this.tapColor,
       this.showBottomBorder,
-      this.tags})
+      this.tags,
+      this.imageAsset})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    return card(context);
+  }
+
+  Widget card(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    return Container(
+      margin: EdgeInsets.only(
+        top: 20,
+        right: 30,
+        left: 30,
+      ),
+      padding: EdgeInsets.all(20),
+      decoration: Styles.strokeAndHardShadowWithBorderColor(tapColor),
+      child: Column(
+        children: <Widget>[
+          // Title
+          Container(
+            margin: EdgeInsets.only(
+              bottom: 20,
+            ),
+            child: Center(
+              child: Text(
+                beerName,
+                style: Styles.mikkellerText(32),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          // Tap and description
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              getImage(),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(bottom: 20),
+                    width: screenWidth - 175,
+                    child: Text(
+                      beerDescription,
+                      textAlign: TextAlign.left,
+                      overflow: TextOverflow.fade,
+                    ),
+                  ),
+                  Row(
+                    children: tags.map((tag) {
+                      return Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            tag,
+                            style: Styles.mikkellerText(24),
+                          ),
+                          tags.indexOf(tag) != tags.length - 1
+                              ? Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 10),
+                                  width: 5,
+                                  height: 5,
+                                  decoration: BoxDecoration(
+                                    color: ColorPicker.mainFontColor,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                  ),
+                                )
+                              : Container(),
+                        ],
+                      );
+                    }).toList(),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget getImage() {
+    if (imageAsset == null) {
+      return Stack(
+        children: <Widget>[
+          Container(
+            height: 150,
+            child: Image.asset("assets/images/mediumtap.png"),
+          ),
+          Positioned(
+            bottom: 25,
+            left: 12,
+            child: Text(
+              index != null ? index.toString() : "",
+              style: Styles.mikkellerText(28),
+            ),
+          ),
+        ],
+      );
+    } else {
+      return Container(
+        width: 40,
+        child: Image.asset(imageAsset),
+      );
+    }
+  }
+
+  Widget flat(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Container(
@@ -112,9 +221,7 @@ class RestaurantBeerCard extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(top: 20),
             height: 1,
-            color: showBottomBorder
-                ? ColorPicker.mainFontColor
-                : tapColor,
+            color: showBottomBorder ? ColorPicker.mainFontColor : tapColor,
           ),
         ],
       ),

@@ -46,9 +46,12 @@ class _RestaurantPageState extends State<RestaurantPage> {
                   Container(
                     margin: EdgeInsets.only(top: 130, bottom: 40),
                     child: Center(
-                      child: Hero(
-                        tag: place.name + 'logo',
-                        child: Image.asset(place.assetPath),
+                      child: Container(
+                        width: 300,
+                        child: Hero(
+                          tag: place.name + 'logo',
+                          child: Image.asset(place.assetPath),
+                        ),
                       ),
                     ),
                   ),
